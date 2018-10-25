@@ -55,16 +55,15 @@ func main() {
 		// Execute the pipeline
 		_, err := pipe.Exec()
 		if err != nil {
-			fmt.Println(err)
+			return c.String(http.StatusInternalServerError, "Internal server error")
 		}
 		currentCount := incr.Val()
 
+		// TODO: acquire thresholds from another service
 		if currentCount <= 5 {
-			payload := apiResponse{true}
-			return c.JSON(http.StatusOK, payload)
+			return c.JSON(http.StatusOK, apiResponse{true})
 		} else {
-			payload := apiResponse{false}
-			return c.JSON(http.StatusOK, payload)
+			return c.JSON(http.StatusOK, apiResponse{false})
 		}
 
 	})
