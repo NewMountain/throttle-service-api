@@ -10,3 +10,9 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# Idiosyncracy of our Docker process
+binaries/
+
+# Ignore our test reports
+test-reports/
