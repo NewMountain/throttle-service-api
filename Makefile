@@ -1,5 +1,5 @@
 run:
-	go run server.go
+	go run server.go handlers.go
 
 test:
 	go test -v --cover
