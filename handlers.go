@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -31,6 +32,7 @@ func createThrottleKey(user *requestBody) string {
 func throttleHandler(client *redis.Client) func(c echo.Context) error {
 
 	return func(c echo.Context) error {
+		fmt.Println("\nRequest!")
 		// Capture the request body
 		u := new(requestBody)
 

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/go-redis/redis"
 	"github.com/labstack/echo"
 )
@@ -12,13 +14,16 @@ func mkRt(url string) string {
 func makeServer() *echo.Echo {
 	// Connect to Redis
 	client := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     "redis",
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
 
 	e := echo.New()
 	e.POST(mkRt("/throttle"), throttleHandler(client))
+
+	pong, err := client.Ping().Result()
+	fmt.Println(pong, err)
 
 	return e
 }
