@@ -2,9 +2,12 @@ version: "2"
 services:
   redis:
     image: "redis:alpine"
-
+    ports:
+      - "6379:6379"
   web:
     build: .
+    environment:
+      - ENV=PROD
     ports:
       - "1323:1323"
     links:
